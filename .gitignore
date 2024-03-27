@@ -1,0 +1,113 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# IntelliJ IDEA files
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Maven files
+target/
+pom.xml.tag
+
+# Gradle files
+.gradle/
+build/
+
+# NetBeans files
+nbproject/
+*.properties
+
+# Spring Boot files
+.mvn/
+
+# OSGi development bundles
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA data directories
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources/
+
+# Eclipse data directories
+.metadata
+.eclipse
+
+# VSCode data directories
+.vscode/
+
+# Maven data directories
+.mvn/
+
+# Gradle data directories
+.gradle/
+
+# SonarQube data directories
+.sonar/
+
+# JetBrains MPS data directories
+.mps/
+
+# Clion data directories
+.idea/compiler.xml
+.idea/debugger.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+# Android Studio data directories
+.gradle/
+.idea/
+.externalNativeBuild/
+local.properties
+gradle.properties
+
+# Grails data directories
+.grails/
+
+# Play Framework data directories
+target/
+conf/
+tmp/
+
+# Vert.x data directories
+target/
+.vertx/
+
+# Quarkus data directories
+target/
+.quarkus/
+
+# Micronaut data directories
+build/
+.micronaut/
+
+# Spring data directories
+target/
+.spring-boot/
+
+# Apache NetBeans data directories
+nbproject/private/
+**/nbactions.xml
+**/nb-configuration.xml
+**/nbproject/Makefile-*
+**/nbproject/platform-*
+
+# Other
+.DS_Store
+Thumbs.db
+
