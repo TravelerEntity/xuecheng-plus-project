@@ -111,3 +111,6 @@ nbproject/private/
 .DS_Store
 Thumbs.db
 
+logs/
+
+xuecheng-plus-generator

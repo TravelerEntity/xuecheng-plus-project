@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
+        <artifactId>xuecheng-plus-system</artifactId>
         <groupId>com.xuecheng</groupId>
-        <artifactId>xuecheng-plus-content</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <artifactId>xuecheng-plus-model</artifactId>
+    <artifactId>xuecheng-plus-system-model</artifactId>
+    <name>xuecheng-plus-system-model</name>
+    <description>xuecheng-plus-system-model</description>
 
     <dependencies>
         <dependency>
@@ -17,8 +17,7 @@
             <artifactId>xuecheng-plus-base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!-- mybatis-plus 注解-->
+        <!--存在mybatisplus注解添加相关注解保证不报错-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
@@ -33,6 +32,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
     </dependencies>
+
 </project>
