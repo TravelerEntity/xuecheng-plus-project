@@ -1,27 +1,25 @@
-server:
-  servlet:
-    context-path: /system
-  port: 63110
 #微服务配置
 spring:
   application:
-    name: system-api
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/xc_system?serverTimezone=UTC&userUnicode=true&useSSL=false&
-    url: jdbc:mysql://ctl.zhi.social:7306/xc_system?serverTimezone=UTC&userUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
-    #    username: root
-#    password: root
-    username: xc
-    password: xcmysql
-# 日志文件配置路径
-logging:
-  config: classpath:log4j2-dev.xml
-
-# swagger 文档配置
-swagger:
-  title: "学成在线系统管理"
-  description: "系统管理接口"
-  base-package: com.xuecheng.system
-  enabled: true
-  version: 1.0.0
+    name: system-api #服务名，是 nacos 的 data id 的一部分
+  # 注册到 nacos
+  cloud:
+    nacos:
+      server-addr: 192.168.101.65:8848
+      discovery:
+        namespace: dev0410
+        group: xuecheng-plus-project
+      config:
+        namespace: dev0410
+        group: xuecheng-plus-project
+        file-extension: yaml
+        refresh-enabled: true
+        shared-configs: #共享配置
+          - dataId: swagger-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+  profiles:
+    active: dev
