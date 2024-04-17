@@ -6,15 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @description minio配置
  * @author Mr.M
- * @date 2022/9/12 19:32
  * @version 1.0
+ * @description TODO
+ * @date 2023/2/17 15:00
  */
- @Configuration
+@Configuration
 public class MinioConfig {
-
-
  @Value("${minio.endpoint}")
  private String endpoint;
  @Value("${minio.accessKey}")
@@ -25,9 +23,13 @@ public class MinioConfig {
  @Bean
  public MinioClient minioClient() {
 
-  return MinioClient.builder()
-         .endpoint(endpoint)
-         .credentials(accessKey, secretKey)
-         .build();
+  MinioClient minioClient =
+          MinioClient.builder()
+                  .endpoint(endpoint)
+                  .credentials(accessKey, secretKey)
+                  .build();
+  return minioClient;
  }
+
+
 }

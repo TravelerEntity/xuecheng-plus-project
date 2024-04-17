@@ -7,13 +7,17 @@ spring:
     nacos:
       server-addr: 192.168.101.65:8848
       discovery:
-        namespace: dev0410
+        namespace: dev
         group: xuecheng-plus-project
       config:
-        namespace: dev0410
+        namespace: dev
         group: xuecheng-plus-project
         file-extension: yaml
         refresh-enabled: true
+        extension-configs: #扩展配置
+          - dataId: system-service-${spring.profiles.active}.yaml
+            group: xuecheng-plus-project
+            refresh: true
         shared-configs: #共享配置
           - dataId: swagger-${spring.profiles.active}.yaml
             group: xuecheng-plus-common
