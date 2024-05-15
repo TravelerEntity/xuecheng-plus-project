@@ -127,10 +127,10 @@ public class VideoTask {
                         return;
                     }
                     //mp4文件的url
-                    String url = getFilePath(fileId, ".mp4");
+                    String url = "/" + bucket + "/" + convertedObjectName;
 
                     //更新任务状态为成功
-                    mediaFileProcessService.saveProcessFinishStatus(taskId, "2", fileId, url, "创建临时文件异常");
+                    mediaFileProcessService.saveProcessFinishStatus(taskId, "2", fileId, url, "success");
                 }finally {
                     //计算器减去1
                     countDownLatch.countDown();

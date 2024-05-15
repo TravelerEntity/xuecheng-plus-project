@@ -2,6 +2,7 @@ package com.xuecheng.content.model.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -45,6 +46,7 @@ public class Teachplan implements Serializable {
     /**
      * 开始直播时间
      */
+    @TableField("start_time")
     private LocalDateTime startTime;
 
     /**

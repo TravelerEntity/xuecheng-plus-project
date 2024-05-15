@@ -25,13 +25,13 @@ import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.security.InvalidKeyException;
@@ -80,10 +80,10 @@ public class MediaFileServiceImpl implements MediaFileService {
 
     @Override
     public PageResult<MediaFiles> queryMediaFiels(Long companyId, PageParams pageParams, QueryMediaParamsDto queryMediaParamsDto) {
-
         //构建查询条件对象
         LambdaQueryWrapper<MediaFiles> queryWrapper = new LambdaQueryWrapper<>();
-
+        queryWrapper.like(!org.springframework.util.StringUtils.isEmpty(queryMediaParamsDto.getFilename()), MediaFiles::getFilename, queryMediaParamsDto.getFilename());
+        queryWrapper.eq(!org.springframework.util.StringUtils.isEmpty(queryMediaParamsDto.getFileType()), MediaFiles::getFileType, queryMediaParamsDto.getFileType());
         //分页对象
         Page<MediaFiles> page = new Page<>(pageParams.getPageNo(), pageParams.getPageSize());
         // 查询数据内容获得结果
@@ -93,9 +93,7 @@ public class MediaFileServiceImpl implements MediaFileService {
         // 获取数据总数
         long total = pageResult.getTotal();
         // 构建结果集
-        PageResult<MediaFiles> mediaListResult = new PageResult<>(list, total, pageParams.getPageNo(), pageParams.getPageSize());
-        return mediaListResult;
-
+        return new PageResult<>(list, total, pageParams.getPageNo(), pageParams.getPageSize());
     }
 
     //根据扩展名获取mimeType
@@ -156,7 +154,7 @@ public class MediaFileServiceImpl implements MediaFileService {
     }
 
     @Override
-    public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath,String objectName) {
+    public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath, String folder,String objectName) {
 
         //文件名
         String filename = uploadFileParamsDto.getFilename();
@@ -170,10 +168,10 @@ public class MediaFileServiceImpl implements MediaFileService {
         String defaultFolderPath = getDefaultFolderPath();
         //文件的md5值
         String fileMd5 = getFileMd5(new File(localFilePath));
-        if(StringUtils.isEmpty(objectName)){
-            //使用默认年月日去存储
-            objectName = defaultFolderPath+fileMd5+extension;
+        if (StringUtils.isEmpty(objectName)) {
+            objectName = filename.substring(filename.lastIndexOf("."));
         }
+        objectName = folder + objectName;
         //上传文件到minio
         boolean result = addMediaFilesToMinIO(localFilePath, mimeType, bucket_mediafiles, objectName);
         if(!result){

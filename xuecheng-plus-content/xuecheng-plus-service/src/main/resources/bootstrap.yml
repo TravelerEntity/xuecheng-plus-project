@@ -4,15 +4,19 @@ spring:
   cloud:
     nacos:
       server-addr: 192.168.101.65:8848
-      discovery:
-        namespace: dev
-        group: xuecheng-plus-project
       config:
-        namespace: dev
+        namespace: ${spring.profiles.active}
         group: xuecheng-plus-project
         file-extension: yaml
         refresh-enabled: true
-        shared-configs:
+        extension-configs: #扩展配置
+          - dataId: content-service-${spring.profiles.active}.yaml
+            group: xuecheng-plus-project
+            refresh: true
+        shared-configs: #共享配置
+          - dataId: swagger-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
           - data-id: logging-${spring.profiles.active}.yaml
             group: xuecheng-plus-common
             refresh: true
@@ -22,10 +26,10 @@ spring:
           - data-id: feign-${spring.profiles.active}.yaml
             group: xuecheng-plus-common
             refresh: true
+
   #profiles默认为dev
   profiles:
     active: dev
 
-# 日志文件配置路径
 logging:
   config: classpath:log4j2-dev.xml
